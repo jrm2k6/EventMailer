@@ -1,0 +1,11 @@
+A little app using RapLeaf API to retrieve information about your emails contact.
+With this app, you could create some events, and it retrieves interested people (supposedly) by itself.
+You could email them directly saying you want to invite them to a specific event.
+
+Django/Rapleaf/Google Data Service
+
+Requirement :
+- A Rapleaf API key
+- Modify the settings.py-dist file to put your own login/password/keys
+
+
