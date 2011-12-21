@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href='/static/stylesheets/main.css'>
+<!--<script src='/static/js/jquery.js'></script>-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src='/static/js/subform_generation.js'></script>
+<title>{% block title %} EventMailer {% endblock %} </title>
+</head>
+<body>
+{% block header %}
+	<div class="bandeau_sup">
+	{% if email_address %}
+		<div id="notif_user">
+		{{ email_address }}
+		</div>
+	{% endif %}
+	</div>
+	<div id="title"><h1><font color="#163B65">Event</font><font color='#336699'>Mailer</font></h1></div>
+{% endblock %}	
+	
+{%block content %}
+{% endblock %}
+
+{% block footer %}
+<div id="footer">
+www.jeremydagorn.com
+{% endblock %}
+</div>
+</body>
+</html>

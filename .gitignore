@@ -1,0 +1,4 @@
+#Ignore settings files
+settings.py
+*.pyc
+*.swp

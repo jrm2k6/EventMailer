@@ -1,0 +1,140 @@
+body{
+	margin: 0;
+	width: 100%;
+	color: #666666;
+    	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    	font-size: 15px;
+    	font-weight: normal;
+
+}
+
+body h1{
+	margin: 0;
+}
+
+.bandeau_sup{
+	padding: 4px;
+	clear:both;
+	background-color: #6B94B9;
+}
+#title{
+	font-family : "Trebuchet MS",Helvetica,Arial,sans-serif;
+	background-color: #F2F2F2;
+	border-bottom: 1px solid #E6E6E6;
+	padding-left: 3%;
+}
+
+#notif_user{
+	text-align: right;
+	color:white;
+}
+
+#panel_others_address {
+	display: none;
+}
+
+#event_description{
+	border:1px solid #6B94B9;
+	background-color: #F2F2F2;
+	border-bottom: 2%;
+}
+
+#interested_people li, #other_address li, #panel_people_to_mail li{
+	list-style: none;
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0.5em 0.75em;
+	text-align:center;
+	background-color: #F2F2F2;
+	font-size: 10pt;
+    	-webkit-border-radius:5px;
+    	-moz-border-radius:5px;
+    	border-radius:5px;
+}
+
+#interested_people li:hover, #other_address li:hover, #panel_people_to_mail li:hover{
+	color: #163B65;
+	font-style: bold;
+}
+
+
+
+#form_mail_params input{
+	text-align: center;
+}
+
+#discard_all, #email_all{
+	margin-bottom: 6px;
+	font-family: bold;
+	color: #336699;
+	text-decoration: none;
+}
+
+#other_address {
+	display: none;
+}
+
+
+
+#panel_people_to_mail{
+	background-color: #FCF3F6;
+	border: solid 1px #F5D6E0;
+	margin-right: 2%;
+}
+
+#content{
+	margin-left:3%;
+	margin-top:3%;
+	font-size: 10pt;
+	margin-bottom: 2%;
+}
+
+.authentication_form input, .sub_form input, .form_event input, #form_event_creation input{
+    	vertical-align: middle;
+    	border: #E2E2E2 solid 1px;
+    	margin-bottom:4px;
+	margin-top: 4px;
+    	margin-left: 4px;
+    	-webkit-border-radius:5px;
+    	-moz-border-radius:5px;
+    	border-radius:5px;
+    	height:30px;
+    	line-height:25px;
+    	width:250px;
+   	text-indent:5px;
+}
+
+.authentication_form{
+    font-family: 'gill sans','gill sans mt','gill sans mt pro','century gothic',corbel,sans-serif;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    text-rendering: optimizelegibility;
+    text-transform: uppercase;
+
+}
+
+.sub_form select{
+	margin-left: 4px;
+	margin-top: 4px;
+	vertical-align: middle;
+}
+
+#sub_form_choices{
+	margin-top:1%;
+	padding-left: 4%;
+	margin-bottom: 4px;
+}
+
+.authentication_form input:focus { outline:none; }
+.sub_form input:focus { outline:none; }
+.form_event input:focus { outline:none; }
+
+#footer{
+	height: 30px;
+	background-color: #6B94B9;
+	text-align: center;
+	color: white;
+	position:absolute;
+	bottom:0;
+	width: 100%;
+}

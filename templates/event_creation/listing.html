@@ -1,0 +1,105 @@
+{% extends "generic/base.html" %}
+{% block content %}
+<div id="content">
+<div id="event_params">
+<h3><font color="#6B94B9">Event : </font> {{event_instance.name}}<br \>
+<font color="#6B94B9">Description : </font> {{event_instance.description}}<br \>
+<font color="#6B94B9">Type : </font> {{event_instance.kind_event.kind_value}}<br \>
+</h3>
+	<div id='event_description'>
+		We have selected all people matching following characteristics:	{{ gender }},
+	{{ age }}
+	</div>
+</div>
+
+<div id="panel">
+	<ul id="interested_people">
+	{% for address in list_interested %}
+		<li id={{address}}>{{ address }} </li>
+	{% endfor %}
+	</ul>
+</div>
+<a href="#" id="email_all">Select all</a>
+
+<div id='panel_other_address'>
+	<ul id="other_address">	
+	{% for address in list_others %}
+		<li id={{address}}>{{ address }} </li>
+	{% endfor %}
+	</ul>
+</div>
+<div id='panel_people_to_mail'>
+<ul id='l_people_to_mail'>
+</ul>
+
+<a href="#" id="discard_all">Discard all</a>
+<form action="/send_emails/" method="POST" id="form_mail_params">
+{% csrf_token %}
+<input type="hidden" name="event_name" value={{event_instance.name}}>
+<input type="hidden" name="event_description" value={{event_instance.description}}>
+<input type="hidden" name="event_type" value={{event_instance.kind_event.kind_value}}>
+<input type = "submit" value="Send emails">
+</form>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+	var one = $("#interested_people");
+	var two = $("#l_people_to_mail");
+	var linkone = $("#email_all");
+	var linktwo = $("#discard_all");
+
+	one.add( two ).on("click", "li", function(){
+    		var target = $.contains(one[0], this) ? two : one;
+    		var new_input =$('<input/>',
+                                  { 'type' : 'hidden',
+                                    'name' : 'recipients',
+                                   'value' : $(this).attr('id'),
+                                     
+                                  });
+    	if (target==two){
+        	new_input.appendTo('#form_mail_params');
+   	}else{
+        	$('input[value="'+$(this).attr('id')+'"]').remove();
+    	}
+    	$(this).appendTo( target ).hide().fadeIn();
+	linktwo.css('display','inline');
+	return false;    
+	});	
+
+	linkone.add(linktwo).on("click", function() {
+    		var originList = ($(this).attr('id') == 'email_all') ? "#interested_people" : "#l_people_to_mail";
+    		var destList = (originList == "#interested_people") ? "#l_people_to_mail" : "#interested_people";
+    		$(originList).children().each(function() {
+        		$(this).appendTo(destList).hide().fadeIn();
+        		if (originList == "#interested_people") {
+            			var new_input = $('<input/>', {
+                			'type': 'hidden',
+                			'name': 'recipients',
+                			'value': $(this).attr('id'),
+			
+            			});
+
+            			new_input.appendTo('#form_mail_params');
+				linkone.css('display','none');
+				linktwo.css('display','inline');
+        			
+			} else {
+            			$('input[value="' + $(this).attr('id') + '"]').remove();
+        			linktwo.css('display','none');
+				linkone.css('display','inline');
+			}
+    		});
+    	return false;
+	});
+
+
+ 
+
+
+});
+</script>
+{% endblock %}

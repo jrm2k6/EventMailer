@@ -1,0 +1,119 @@
+{% extends "generic/base.html" %}
+{% block content %}
+<div id="content">
+<div id="panel_email_address">
+{% if list_emails %}
+	<ul class="email_listing">
+	{% for email in list_emails %}
+	<li class="email_item">
+	{{ email }}
+	</li>
+	{%endfor %}
+	</ul>
+	
+{% endif %}
+</div>
+<form action="/save_event/" method="GET" id="form_event_creation">
+{{ kind_form.non_fields_errors }}
+{% if kind_form %}
+	<div class="formline">
+		{{ kind_form }}
+	<span class="create_new"> or <a href="#" id="new_kind">(Create New)</a></span>
+	</div>
+	<div id="event_subform"></div>
+	<input type="submit"  value="Continue" />
+</form>
+{% endif %}
+
+	<div class="notif_emailing">
+	{% if confirm_message %}
+	<font color="green"> {{confirm_message}} </font> 
+	{% else %} 
+		{% if error_message %}
+		<font color="red" >{{error_message}} </font>
+		{% endif %}
+	{% endif %}
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+
+	$('#id_kind_choice').change(function() {
+		var event_form = $('<div class = "form_event">'+
+                                   '<label> Name Event:</label><input type="text" name = "js_event_name" id="input_event_name" /><br />'+
+                                   '<label> Description :</label><input type="text" name = "js_event_description" id="input_event_description"/><br />'+
+                                   '<a class="cancel" href ="">Cancel</a>'+
+                                   '</div>');
+                                  event_form.find('a.cancel').click(function() {
+                                          $('.form_event').replaceWith($('<div id="event_subform"></div>'));
+                                          return false;
+
+				});
+		$('#event_subform').replaceWith(event_form);
+	});
+
+	$('#new_kind').click(function() {
+  		var old_content = $(this).parent().parent().clone(true);
+		$(this).parent().remove();
+		var form = $('<div class="sub_form">'+
+				'<label> Name:</label> <input type="text" name="js_kind_value" id="input_kind_value" /> <br />'+
+				'<label> Gender:</label>'+
+				'<select id="gender_select" name="js_gender_value">'+
+				'<option value="0">Male</option>'+
+  				'<option value="1">Female</option>'+
+  				'<option value="2">Not determined</option>'+
+				'</select><br />'+ 
+				'<label> Age:</label>'+
+				'<select id="age_select" name="js_age_value">'+
+				'<option value="0">Under 18</option>'+
+  				'<option value="1">18-25</option>'+
+  				'<option value="2">25-35</option>'+
+  				'<option value="3">35-50</option>'+
+  				'<option value="4">+50</option>'+
+				'</select><br />'+ 
+				
+				'<div id="sub_form_choices"><a class ="create_kind" href="">Create</a>&nbsp | &nbsp'+ 
+				'<a class ="cancel" href="">Cancel</a></div>'+ 
+				'</div>');
+		form.find('a.cancel').click(function() {
+			$('.sub_form').replaceWith(old_content);
+			return false;
+		});
+	
+
+
+		form.find('.create_kind').click(function() {
+			if ($('#input_kind_value').val() > ''){ 
+				/* We check if there is some characters in the input */
+				var old_content = $(this).parent().parent().clone(true);
+				var event_form = $('<div class = "form_event">'+
+						 '<label> Name Event:</label><input type="text" name = "js_event_name" id="input_event_name" /><br />'+
+						 '<label> Description :</label><input type="text" name = "js_event_description" id="input_event_description"/><br />'+
+				 		'<a class="cancel" href ="">Cancel</a>'+
+				 		'</div>');
+				event_form.find('a.cancel').click(function() {
+					$('.form_event').replaceWith($('<div id="event_subform"></div>'));
+					return false;
+				});
+			
+			$('#event_subform').replaceWith(event_form);
+			return false;
+			} else { 
+				return false; }
+			});
+		$('.formline').replaceWith(form);
+		return true;
+	});
+	
+	$('#form_event_creation').submit(function() {
+			if ((!($('#input_event_name').val() > '')) || (!($('#input_event_description').val() > ''))){
+				$('#error_form').text('Missing fields').show().fadeOut(2000);
+				return false;
+			} 
+		return true;
+	});
+	
+});
+</script>
+
+{% endblock %}

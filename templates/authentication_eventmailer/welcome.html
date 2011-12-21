@@ -1,0 +1,15 @@
+{% extends "generic/base.html" %}
+{% block content %}
+{{form.non_fields_errors}}
+{% if auth_error %}{{ auth_error }} {% endif %}
+<form class="authentication_form" action="/authenticate/" method="POST">
+{% csrf_token %}
+
+{{ form.email_address.label }}<br \>
+{{ form.email_address }}<br \>
+{{ form.password.label }}<br \>
+{{ form.password }}<br \>
+<input type="submit" name="Login" value="Log in"/>
+</form>
+{% endblock %}
+
